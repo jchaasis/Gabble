@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Gabble Login</title>
+  <link rel="stylesheet" href="/stylin.css">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+</head>
+<body>
+<main>
+
+  <h3> Welcome to Gabble! Please login </h3>
+
+  <div class = "gateway">
+      <form method="post" action="/login">
+        
+        <label>Username:</label>
+        <input type="text" name="username">
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password">
+        <br>
+        <input type="submit" value="Login">
+      </form>
+  </div>
+
+  <p>Not a member? Sign up for free <a href="/register"> here</a></p>
+
+</main>
+
+</body>
+
+</html>
