@@ -3,7 +3,7 @@
 <head>
   <title>Gabble Home</title>
   <link rel="stylesheet" href="/stylin.css">
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -16,17 +16,32 @@
         <li>
           <a href="/create" class = "navLink"><p>Create a new gab</p></a>
         </li>
+        <li>
     </nav>
   </header>
   <main>
+    <section>
+      <h2> Hello {{ activename }}! </h2>
+      <form method="post" action="/logout">
+         <input type="submit" value="logout">
+      </form>
+
+    </section>
+    {{ #messages }}
     <div>
-      <p> Name: message <br>
-          publish data <br>
-          likes
+
+      <p> Name: {{ user.name }} <br>
+
+                {{ body }} <br>
+                {{ createdAt }} <br>
+         likes: {{ likes }}
+
+          <form method="post" action="/like/{{ id }}">
+            <input type="submit" value="like">
+          </form>
       </p>
-      <form method="post" action="/like">
-        <input type="submit" value="like">
-      <form>
+    </div>
+      {{ /messages }}
 
 
 
