@@ -11,22 +11,15 @@ const Sequelize = require('sequelize');
         name: Sequelize.STRING,
     });
 
-    // User.hasMany(Message);
-    // User.sync();
-
     const Message = db.define('message', {
          body: Sequelize.STRING(140),
          userId: Sequelize.INTEGER,
     });
 
-    // Message.belongsTo(User, {foreignKey: 'userId'});
-    // Message.hasMany(Like);
-    // Message.sync();
-
     const Like = db.define('like', {
       messageId: Sequelize.INTEGER,
       userId: Sequelize.INTEGER,
-      // liked: Sequelize.BOOLEAN,
+
     });
 
 

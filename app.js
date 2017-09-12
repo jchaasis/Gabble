@@ -48,13 +48,11 @@ app.use(session({
   app.get('/home', function(req, res){
 
 
-// count the number of likes per message. get the results similar to below
-//select count("messageId"), messages.body from likes join messages on //(likes."messageId" = messages.id) group by messages.body;
-
+  //likes list
 
       schemas.Message.findAll({
               include: [ schemas.User ],
-            
+
           }).then(function(messages){
 
             const promises = [];
@@ -85,6 +83,25 @@ app.use(session({
     res.render('create');
 
   });
+
+  //likes display page
+  app.get('/likes/:message_id', function(req, res){
+
+        const id =  req.params.message_id; 
+
+        schemas.Message.findById(
+          parseInt(id)
+        ).then(function(results){
+          res.render("likes", {
+
+              results: results,
+
+          });
+
+        });
+
+  });
+
 
 //post
   //new user

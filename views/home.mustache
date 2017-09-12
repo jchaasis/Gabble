@@ -3,7 +3,7 @@
 <head>
   <title>Gabble Home</title>
   <link rel="stylesheet" href="/stylin.css">
-  <!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 
                 {{ body }} <br>
                 {{ createdAt }} <br>
-         likes: {{ likes }}
+         likes: <a href="/likes/{{ id }}">{{ likes }} </a>
 
           <form method="post" action="/like/{{ id }}">
             <input type="submit" value="like">
