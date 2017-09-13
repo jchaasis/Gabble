@@ -21,21 +21,17 @@
   </header>
   <main>
 
-    {{ #results }}
-      <p>
-      {{ results.name }}
-      {{ results.body }} <br>
-      {{ results.createdAt }} <br>
-      </p>
+      <p> {{ message.body }}
+          <br>
+          {{ message.createdAt}}
 
+      </p>
       <h4> Liked By: </h4>
 
-    <div>
-
-    </div>
-
-
-
+    {{ #results }}
+      <p>
+        {{ user.name }}
+      </p>
     {{ /results}}
 
 

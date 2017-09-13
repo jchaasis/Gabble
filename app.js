@@ -47,7 +47,6 @@ app.use(session({
   //home
   app.get('/home', function(req, res){
 
-
   //likes list
 
       schemas.Message.findAll({
@@ -58,6 +57,9 @@ app.use(session({
             const promises = [];
 
             for (let i = 0; i < messages.length; i++) {
+              if (messages[i].userId === req.session.who.id){
+                   messages[i].active = true;
+              }
               const promise = schemas.Like.count({
                 where: {
                   messageId: messages[i].id,
@@ -71,8 +73,10 @@ app.use(session({
 
             Promise.all(promises).then(function () {
               res.render('home', {
+
                       activename: req.session.who.name,
                       messages: messages,
+                      // active: active,
               });
             });
           });
@@ -87,19 +91,53 @@ app.use(session({
   //likes display page
   app.get('/likes/:message_id', function(req, res){
 
-        const id =  req.params.message_id; 
+        const id =  req.params.message_id;
 
-        schemas.Message.findById(
-          parseInt(id)
-        ).then(function(results){
+        // schemas.Message.findAll({
+        //         include: [ schemas.User ],
+        //
+        //     }).then(function(messages){
+        //
+        //       const promises = [];
+        //
+        //       for (let i = 0; i < messages.length; i++) {
+        //         const promise = schemas.Like.count({
+        //           where: {
+        //             messageId: messages[i].id,
+        //           },
+        //         }).then(function (likes) {
+        //           messages[i].likes = likes; // store the # of likes
+        //         });
+        //
+        //         promises.push(promise);
+        //       }
+        //
+        //       Promise.all(promises).then(function () {
+        //         res.render('home', {
+        //                 activename: req.session.who.name,
+        //                 messages: messages,
+        //         });
+        //       });
+        //     });
+
+        schemas.Like.findAll({
+          where: {messageId: parseInt(id)},
+          include: [ schemas.User ],
+
+        }
+      ).then(function(results){
+
+        schemas.Message.findById(parseInt(id)).then(function(message){
+
           res.render("likes", {
-
+              message: message,
               results: results,
 
           });
 
-        });
+        })
 
+        });
   });
 
 
