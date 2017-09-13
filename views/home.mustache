@@ -36,18 +36,19 @@
                 {{ createdAt }} <br>
          likes: <a href="/likes/{{ id }}">{{ likes }} </a>
 
-          <form method="post" action="/like/{{ id }}">
-            <input type="submit" value="like">
-          </form>
-          
+
+
            {{ #active }}
            <form method="post" action="/delete/{{ id }}">
-             <input type="submit" value="delete">
+              <input type="submit" value="delete">
            </form>
 
            {{ /active }}
 
            {{ ^active }}
+             <form method="post" action="/like/{{ id }}">
+               <input type="submit" value="like">
+             </form>
            {{ /active}}
       </p>
     </div>

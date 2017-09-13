@@ -185,11 +185,38 @@ app.use(session({
       res.redirect('/home');
 
   });
+  //delete Gab
+  app.post('/delete/:id', function(req, res){
+
+    schemas.Like.destroy({
+                  where: {
+                    messageId: req.params.id,
+                  }
+
+    }).then(function(){
+
+      schemas.Message.destroy({
+                      where: {
+                        id: req.params.id,
+                      }
+      }).then(function(){
+          res.redirect('/home');
+      });
+    });
+
+  });
+  //
+  //   schemas.Message.destroy({
+  //                   where: {
+  //                     id: req.params.id,
+  //                   }
+  //   }).then(function(){
+  //       res.redirect('/home');
+  //   });
+  // });
 
   //like a message
   app.post('/like/:id', function(req, res){
-
-    console.log(req.params.id);
 
     schemas.Message.findById(req.params.id,)
         .then(function (liked) {
@@ -204,7 +231,6 @@ app.use(session({
         res.redirect('/home');
         });
   });
-
 
   //logout
   app.post('/logout', function(req, res){
